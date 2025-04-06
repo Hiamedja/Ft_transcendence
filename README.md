@@ -1,4 +1,5 @@
 🏓 Transcendence Frontend
+
 Welcome to the Frontend of the Transcendence project, built using Vanilla JavaScript, HTML, and CSS. This project is part of the 42 Network curriculum and is designed as a full-featured web app, including real-time multiplayer Pong gameplay, user profiles, authentication, and more.
 
 📸 Preview
