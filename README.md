@@ -6,6 +6,7 @@ Welcome to the Frontend of the Transcendence project, built using Vanilla JavaSc
 Add a screenshot or GIF of the main interface or game here (optional but highly recommended).
 
 📄 Project Description – Frontend Development
+
 As the Frontend Developer for the Transcendence project, I built the entire user-facing interface using Vanilla JavaScript, HTML, and CSS without any frontend frameworks. The goal was to deliver a responsive, intuitive, and visually clean web application experience for a real-time multiplayer Pong game platform.
 
 My contributions included:
