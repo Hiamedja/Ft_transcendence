@@ -3,7 +3,19 @@
 Welcome to the Frontend of the Transcendence project, built using Vanilla JavaScript, HTML, and CSS. This project is part of the 42 Network curriculum and is designed as a full-featured web app, including real-time multiplayer Pong gameplay, user profiles, authentication, and more.
 
 📸 Preview
-Add a screenshot or GIF of the main interface or game here (optional but highly recommended).
+
+![signup](https://github.com/user-attachments/assets/4364cc62-e387-4a3f-bd9f-91aeaef7be43)
+![login](https://github.com/user-attachments/assets/bef11e95-edea-42c6-b469-0c212f2ad6be)
+![dashboard](https://github.com/user-attachments/assets/6548194c-c2ac-4f30-8447-3ca618ddcde6)
+![Profile](https://github.com/user-attachments/assets/a6f65e42-5740-46b2-b326-96a3d5f31052)
+![friends](https://github.com/user-attachments/assets/46f621d0-8644-4986-b870-519eaf68ede5)
+![settings](https://github.com/user-attachments/assets/d4ec44c3-ff94-488e-85ac-38972e7c7012)
+![eddit password](https://github.com/user-attachments/assets/a9c4e4d9-1ab2-4ff2-963a-97a18699ea80)
+![enable 2fa](https://github.com/user-attachments/assets/1ac10740-d5e9-4889-a423-9c6eb1abac4a)
+![disable 2fa](https://github.com/user-attachments/assets/1bfedd72-25ce-4b12-b6bf-3764cffac01d)
+![game mode](https://github.com/user-attachments/assets/a189220e-61cd-4688-8318-96c33960b712)
+
+
 
 📄 Project Description – Frontend Development
 
