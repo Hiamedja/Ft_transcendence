@@ -1,33 +1,4 @@
 
-// function updateCircleProgress(circleId, rate) {
-//     const circle = document.getElementById(circleId);
-//     const percentageText = circle.querySelector(".percentage"); 
-
-
-//     const filledDegree = rate * 3.6;
-
-
-//     circle.style.background = `conic-gradient(
-// rgb(164, 17, 63) ${filledDegree}deg, /* red for the filled part */
-// rgb(9, 6, 16) ${filledDegree}deg /* gray for the unfilled part */
-//     )`;
-
-//     percentageText.textContent = `${rate}%`;
-// }
-
-
-// function initProgressCircles() {
-//     const winRate = 75; 
-//     const loseRate = 50; 
-
-    
-//     updateCircleProgress("winRateCircle", winRate);
-//     updateCircleProgress("loseRateCircle", loseRate);
-// }
-
-
-// document.addEventListener("DOMContentLoaded", initProgressCircles);
-
 
 function updateCircleProgress(circleId, rate) {
     const circle = document.getElementById(circleId); 
@@ -115,34 +86,6 @@ function updateStats(data) {
     initProgressCircles(data.winRate, data.loseRate);
 }
 
-// async function fetchGameHistoryData() {
-//     try {
-//         const response = await fetch('/accounts/api/game_history/');
-//         if (!response.ok) {
-//             throw new Error('Failed to fetch game history data');
-//         }
-//         const data = await response.json();
-//         updateGameHistory(data);
-//     } catch (error) {
-//         console.error('Error fetching game history data:', error);
-//     }
-// }
-
-// function updateGameHistory(data) {
-//     const gameHistoryTable = document.querySelector('.game-history tbody');
-//     gameHistoryTable.innerHTML = ''; 
-
-//     data.forEach(game => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//             <td><img src="${game.userAvatar}" alt="User"> ${game.username}</td>
-//             <td>${game.time}</td>
-//             <td>${game.type}</td>
-//             <td>${game.status}</td>
-//         `;
-//         gameHistoryTable.appendChild(row);
-//     });
-// }
 
 async function fetchMatchHistoryData() {
     try {
