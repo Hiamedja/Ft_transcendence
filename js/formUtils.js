@@ -150,7 +150,7 @@ function showMessage(containerId, message, isError = false) {
         container.textContent = message;
         container.style.color = isError ? 'red' : 'green';
         container.style.display = message ? 'block' : 'none';
-        // container.style.display = 'block';
+       
     }
 }
 
@@ -182,13 +182,13 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     }
 
     try {
-        // const token = localStorage.getItem('jwtToken');
+       
         const response = await fetch('/accounts/api/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCsrfToken(),
-                // 'Authorization': `Bearer ${token}`
+                
             },
             body: JSON.stringify({
                 username: form.username.value,
@@ -218,13 +218,13 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const form = e.target;
 
     try {
-        // const token = localStorage.getItem('jwtToken');
+       
         const response = await fetch('/accounts/api/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCsrfToken(),
-                // 'Authorization': `Bearer ${token}`
+                
             },
             body: JSON.stringify({
                 email: form.email.value,
@@ -940,13 +940,13 @@ document.getElementById('savedata').addEventListener('click', async (e) => {
     const confirmPassword = inputs[2].value.trim();
 
     if (!currentPassword || !newPassword || !confirmPassword) {
-        // alert('All fields are required.');
+        
         showMessage('change-password-message-container', 'All fields are required.', true);
         return;
     }
 
     if (newPassword !== confirmPassword) {
-        // alert('New password and confirm password do not match.');
+        
         showMessage('change-password-message-container', 'New password and confirm password do not match.', true);
         return;
     }
@@ -970,16 +970,13 @@ document.getElementById('savedata').addEventListener('click', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('Password changed successfully. Please log in with your new password.');
             showMessage('change-password-message-container', 'Password changed successfully. Please log in with your new password.');
             showForm('settings');
         } else {
-            // alert(data.message || 'Failed to change password. Please check your current password and try again.');
             showMessage('change-password-message-container', data.message || 'Failed to change password. Please check your current password and try again.', true);
         }
     } catch (error) {
         console.error('Error changing password:', error);
-        // alert('An error occurred while changing the password. Please try again.');
         showMessage('change-password-message-container', 'An error occurred while changing the password. Please try again.', true);
     }
 });
@@ -1045,12 +1042,10 @@ async function showEnable2FA() {
             const data = await response.json();
             qrImage.src = data.qr_code_url;
         } else {
-            // alert('Failed to load QR code. Please try again.');
             showMessage('enable-2fa-message-container', 'Failed to load QR code. Please try again.', true);
         }
     } catch (error) {
         console.error('Error fetching QR code:', error);
-        // alert('An error occurred while fetching the QR code.');
         showMessage('enable-2fa-message-container', 'An error occurred while fetching the QR code.', true);
     }
 }
@@ -1062,7 +1057,6 @@ async function submitTwoFactorCode() {
     const passcode = input.value.trim();
 
     if (!passcode) {
-        // alert('Please enter the passcode.');
         showMessage('enable-2fa-message-container', 'Please enter the passcode.', true);
         return;
     }
@@ -1083,16 +1077,13 @@ async function submitTwoFactorCode() {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('2FA enabled successfully.');
             showMessage('enable-2fa-message-container', '2FA enabled successfully.');
             closeOverlay1(); 
         } else {
-            // alert(data.message || 'Failed to enable 2FA. Please try again.');
             showMessage('enable-2fa-message-container', data.message || 'Failed to enable 2FA. Please try again.', true);
         }
     } catch (error) {
         console.error('Error enabling 2FA:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('enable-2fa-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1147,16 +1138,13 @@ async function submitDisable2FA() {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('2FA disabled successfully.');
             showMessage('disable-2fa-message-container', '2FA disabled successfully.');
             closeOverlay2();
         } else {
-            // alert(data.message || 'Failed to disable 2FA. Please try again.');
             showMessage('disable-2fa-message-container', data.message || 'Failed to disable 2FA. Please try again.', true);
         }
     } catch (error) {
         console.error('Error disabling 2FA:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('disable-2fa-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1199,18 +1187,16 @@ async function submitDeleteAccount(passcode) {
 
 
         if (response.ok) {
-            // alert('Account deleted successfully.');
+
             localStorage.removeItem('jwtToken');
             showMessage('delete-account-message-container', 'Account deleted successfully.');
             showForm('login-form');
         } else {
             const data = await response.json();
-            // alert(data.message || 'Failed to delete account. Please try again.');
             showMessage('delete-account-message-container', data.message || 'Failed to delete account. Please try again.', true);
         }
     } catch (error) {
         console.error('Error deleting account:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('delete-account-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1265,7 +1251,6 @@ async function submitVerificationCode() {
     const passcode = input.value.trim();
 
     if (!passcode) {
-        // alert('Please enter the verification code.');
         showMessage('verify-2fa-message-container', 'Please enter the verification code.', true);
         return;
     }
@@ -1286,7 +1271,6 @@ async function submitVerificationCode() {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('2FA verification successful.');
             showMessage('verify-2fa-message-container', '2FA verification successful.');
             overlay.classList.add('hidden');
 
@@ -1295,12 +1279,10 @@ async function submitVerificationCode() {
                 submitDeleteAccount(passcode);
             }
         } else {
-            // alert(data.message || 'Invalid code. Please try again.');
             showMessage('verify-2fa-message-container', data.message || 'Invalid code. Please try again.', true);
         }
     } catch (error) {
         console.error('Error verifying 2FA:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('verify-2fa-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1400,18 +1382,6 @@ function closeOverlay5() {
 
 
 
-
-
-
-
-
-// function showFriendRequest() {
-//     const overlay = document.getElementById('friend-request-overlay');
-//     overlay.classList.remove('hidden');
-//     overlay.setAttribute('aria-hidden', 'false');
-// }
-
-
 async function acceptFriendRequest(username) {
     try {
         const token = localStorage.getItem('jwtToken');
@@ -1478,69 +1448,6 @@ function removeFriendRequest(username) {
 }
 
 
-// async function fetchFriendRequests() {
-//     try {
-//         const token = localStorage.getItem('jwtToken');
-//         const response = await fetch('/accounts/api/friend_requests/', {
-//             method: 'GET',
-//             headers: {
-//                 'X-CSRFToken': getCsrfToken(),
-//                 'Authorization': `Bearer ${token}`
-//             },
-//             credentials: 'include'
-//         });
-
-//         if (response.ok) {
-//             const data = await response.json();
-//             updateFriendRequests(data);
-//         } else {
-//             console.error('Failed to fetch friend requests');
-//         }
-//     } catch (error) {
-//         console.error('Error fetching friend requests:', error);
-//     }
-// }
-
-
-// function updateFriendRequests(data) {
-//     const requestsList = document.querySelector('.friend-requests-list');
-//     requestsList.innerHTML = '';
-
-//     data.forEach(request => {
-//         const requestItem = document.createElement('div');
-//         requestItem.classList.add('friend-request-item');
-//         requestItem.innerHTML = `
-//             <span class="friend-username">${request.username}</span>
-//             <div class="friend-request-actions">
-//                 <button class="accept-btn" onclick="acceptFriendRequest('${request.username}')">
-//                     <img src="{% static 'accounts/img/accept.png' %}" alt="Accept">
-//                 </button>
-//                 <button class="reject-btn" onclick="rejectFriendRequest('${request.username}')">
-//                     <img src="{% static 'accounts/img/decline.png' %}" alt="Reject">
-//                 </button>
-//             </div>
-//         `;
-//         requestsList.appendChild(requestItem);
-//     });
-// }
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const friendsIcon = document.querySelector('#friends-icon');
-//     if (friendsIcon) {
-//         friendsIcon.addEventListener('click', async () => {
-//             showForm('friends');
-//             await fetchFriendRequests();
-//         });
-//     }
-// });
-
-// function closeOverlay5() {
-//     const overlay = document.getElementById('friend-request-overlay');
-//     overlay.classList.add('hidden');
-//     overlay.setAttribute('aria-hidden', 'true');
-// }
-
 
 function showAddFriend() {
     const overlay = document.getElementById('add-friend-overlay');
@@ -1563,7 +1470,6 @@ async function submitAddFriend() {
     showMessage('add-friend-message-container', '');
 
     if (!username) {
-        // alert('Please enter a username.');
         showMessage('add-friend-message-container', 'Please enter a username.', true);
         return;
     }
@@ -1584,16 +1490,13 @@ async function submitAddFriend() {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('Friend request sent successfully.');
             showMessage('add-friend-message-container', 'Friend request sent successfully.');
             closeOverlay6();
         } else {
-            // alert(data.message || 'Failed to send friend request. Please try again.');
             showMessage('add-friend-message-container', data.message || 'Failed to send friend request. Please try again.', true);
         }
     } catch (error) {
         console.error('Error sending friend request:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('add-friend-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1619,7 +1522,6 @@ async function submitRemoveFriend() {
     showMessage('remove-friend-message-container', '');
 
     if (!username) {
-        // alert('Please enter a username.');
         showMessage('remove-friend-message-container', 'Please enter a username.', true);
         return;
     }
@@ -1640,16 +1542,13 @@ async function submitRemoveFriend() {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('Friend removed successfully.');
             showMessage('remove-friend-message-container', 'Friend removed successfully.');
             closeOverlay7();
         } else {
-            // alert(data.message || 'Failed to remove friend. Please try again.');
             showMessage('remove-friend-message-container', data.message || 'Failed to remove friend. Please try again.', true);
         }
     } catch (error) {
         console.error('Error removing friend:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('remove-friend-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1704,12 +1603,10 @@ async function loadFriendsList() {
                 friendList.appendChild(listItem);
             });
         } else {
-            // alert(data.message || 'Failed to load friends list. Please try again.');
             showMessage('my-friends-message-container', data.message || 'Failed to load friends list. Please try again.', true);
         }
     } catch (error) {
         console.error('Error loading friends list:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('my-friends-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1738,16 +1635,13 @@ async function removeFriend(username) {
         const data = await response.json();
 
         if (response.ok) {
-            // alert('Friend removed successfully.');
             showMessage('my-friends-message-container', 'Friend removed successfully.');
             loadFriendsList(); 
         } else {
-            // alert(data.message || 'Failed to remove friend. Please try again.');
             showMessage('my-friends-message-container', data.message || 'Failed to remove friend. Please try again.', true);
         }
     } catch (error) {
         console.error('Error removing friend:', error);
-        // alert('An error occurred. Please try again.');
         showMessage('my-friends-message-container', 'An error occurred. Please try again.', true);
     }
 }
@@ -1826,11 +1720,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         console.log('Overlay displayed successfully.');
                     } else {
                         console.error('Error fetching profile:', data.message);
-                        // alert('Error fetching profile data. Please try again later.');
+ 
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    // alert('An unexpected error occurred. Please try again.');
+                    
                 }
             }
         });
@@ -1894,147 +1788,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const leaderboardList = document.querySelector('.leaderboard-list');
-
-//     if (leaderboardList) {
-//         leaderboardList.addEventListener('click', async function (event) {
-//             const clickedItem = event.target.closest('li');
-//             if (clickedItem) {
-//                 const username = clickedItem.querySelector('.username').textContent.trim();
-
-//                 console.log('Fetching profile data for:', username);
-
-//                 try {
-//                     const response = await fetch(`/api/profile/${username}/`, {
-//                         method: 'GET',
-//                         headers: {
-//                             'Content-Type': 'application/json',
-//                         },
-//                     });
-
-//                     console.log('API Response:', response);
-
-//                     if (!response.ok) {
-//                         throw new Error(`HTTP error! status: ${response.status}`);
-//                     }
-
-//                     const data = await response.json();
-//                     console.log('Parsed Response Data:', data);
-
-//                     if (data.status === 'success') {
-//                         const overlay = document.getElementById('user-profile-overlay');
-//                         const profileAvatarImg = document.querySelector('#profile-useravatar-img img');
-//                         const displayUsername = document.getElementById('display-userusername');
-//                         const displayEmail = document.getElementById('display-useremail');
-//                         const displayScore = document.getElementById('display-userscore');
-//                         const addFriendButton = document.getElementById('addfrnd');
-
-                        
-//                         addFriendButton.style.display = 'none'; 
-//                         addFriendButton.disabled = false;
-//                         addFriendButton.textContent = ''; 
-
-//                         profileAvatarImg.src = data.profile_picture || '/img/default-avatar.jpg';
-//                         displayUsername.textContent = data.user.username;
-//                         displayEmail.textContent = data.user.email;
-//                         displayScore.textContent = data.level;
-
-//                         overlay.classList.remove('hidden');
-//                         overlay.setAttribute('aria-hidden', 'false');
-
-            
-//                         if (data.is_self) {
-//                             addFriendButton.style.display = 'none';
-//                         } else if (data.is_friend) {
-//                             addFriendButton.textContent = 'Already Friend';
-//                             addFriendButton.disabled = true;
-//                             addFriendButton.style.display = 'block';
-//                         } else {
-//                             addFriendButton.textContent = 'Add Friend';
-//                             addFriendButton.disabled = false;
-//                             addFriendButton.style.display = 'block';
-//                         }
-                        
-//                         console.log('API Response Data:', data);
-//                         console.log('is_self:', data.is_self, 'is_friend:', data.is_friend);
-
-//                         console.log('Overlay displayed successfully.');
-//                     } else {
-//                         console.error('Error fetching profile:', data.message);
-//                         // alert('Error fetching profile data. Please try again later.');
-        
-//                     }
-//                 } catch (error) {
-//                     console.error('Error:', error);
-//                     // alert('An unexpected error occurred. Please try again.');
-//                 }
-//             }
-//         });
-//     } else {
-//         console.log('Leaderboard list not found.');
-//     }
-//     console.log('DOM Loaded: Checking for addfrnd button.');
-//     const addFriendButton = document.getElementById('addfrnd');
-
-//     console.log('Add Friend Button:', addFriendButton);
-    
-
-
-//     if (addFriendButton) {
-//         addFriendButton.addEventListener('click', async function () {
-//             const username = document.getElementById('display-userusername').textContent.trim();
-//             console.log('Revealing overlay for user profile:', username);
-//             console.log('Add Friend Button after overlay shown:', addFriendButton);
-
-           
-
-//             try {
-//                 const csrfToken = getCsrfToken();
-//                 console.log('Using CSRF Token:', csrfToken); 
-                
-//                 const response = await fetch(`/api/add-friend/${username}/`, {
-//                     method: 'POST',
-//                     headers: {
-//                         'Accept': 'application/json',
-//                         'Content-Type': 'application/json',
-//                         'X-CSRFToken': csrfToken,
-//                     },
-//                     credentials: 'same-origin', 
-//                     body: JSON.stringify({}), 
-//                 });
-                
-                
-//                 const contentType = response.headers.get('content-type');
-//                 if (contentType && contentType.includes('application/json')) {
-//                     const data = await response.json();
-//                     console.log('Response data:', data);
-                    
-//                     if (response.ok) {
-//                         // alert(data.message || 'Friend request sent successfully!');
-//                         showMessage('user-profile-message-container', data.message || 'Friend request sent successfully!');
-//                         addFriendButton.textContent = 'Already Friends';
-//                         addFriendButton.disabled = true;
-//                     } else {
-//                         // alert(data.error || 'Failed to send friend request.');
-//                         showMessage('user-profile-message-container', data.error || 'Failed to send friend request.', true);
-//                     }
-//                 } else {
-//                     const text = await response.text();
-//                     console.error('Non-JSON response:', text);
-//                     // alert('Server returned an invalid response. Please try again.');
-//                     showMessage('user-profile-message-container', 'Server returned an invalid response. Please try again.', true);
-//                 }
-//             } catch (error) {
-//                 console.error('Error sending friend request:', error);
-//                 // alert('An unexpected error occurred. Please try again.');
-//                 showMessage('user-profile-message-container', 'An unexpected error occurred. Please try again.', true);
-//             }
-//         });
-//     }
-// });
 
 function closeOverlay9() {
     const overlay = document.getElementById('user-profile-overlay');
